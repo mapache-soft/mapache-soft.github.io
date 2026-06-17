@@ -1,11 +1,109 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout
+	title="Mapache Softworks GmbH — Apps and software consulting"
+	description="Mapache Softworks GmbH builds independent apps and offers software engineering, product strategy, automation, and developer education services."
+>
+	<section class="hero">
+		<div class="container">
+			<p class="eyebrow">Independent software from Vienna</p>
+			<h1>Thoughtful apps and product-minded software work.</h1>
+			<p class="lede">
+				Mapache Softworks GmbH is the one-person company behind focused software products and hands-on consulting for teams who care about building useful, trustworthy technology.
+			</p>
+			<div class="hero-actions">
+				<a class="button" href="/services/">Work with me</a>
+				<a class="button-secondary" href="/apps/">Explore the apps</a>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container grid two">
+			<article class="card">
+				<p class="eyebrow">App</p>
+				<h3>Renamer</h3>
+				<p>Batch rename thousands of files with reusable workflows, live previews, smart undo, and local AI Assist when you need a starting point.</p>
+				<ul class="tag-list" aria-label="Renamer highlights">
+					<li>macOS</li>
+					<li>Windows</li>
+					<li>Batch workflows</li>
+				</ul>
+				<div class="card-actions">
+					<a class="button-secondary" href="https://renamer.com/mac">Visit Renamer</a>
+				</div>
+			</article>
+			<article class="card">
+				<p class="eyebrow">App</p>
+				<h3>Archiver</h3>
+				<p>Open RAR, Zip, 7zip, and dozens more archive formats on macOS. Preview without extracting and create encrypted archives when privacy matters.</p>
+				<ul class="tag-list" aria-label="Archiver highlights">
+					<li>macOS</li>
+					<li>Archive preview</li>
+					<li>AES-256</li>
+				</ul>
+				<div class="card-actions">
+					<a class="button-secondary" href="https://archiverapp.com">Visit Archiver</a>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<section>
+		<div class="container split">
+			<div>
+				<p class="eyebrow">Consulting and contracting</p>
+				<h2>Help for teams building developer-facing and user-respecting software.</h2>
+			</div>
+			<div class="panel">
+				<p>
+					I can help with product engineering, architecture decisions, developer education, technical content, automation strategy, and the glue work that turns ideas into shipped, maintainable software.
+				</p>
+				<ul class="list">
+					<li><strong>Software development:</strong> web, mobile, macOS, APIs, release workflows, and pragmatic architecture.</li>
+					<li><strong>Developer enablement:</strong> documentation, workshops, onboarding paths, demos, and education programs.</li>
+					<li><strong>Automation strategy:</strong> choosing what to automate, what to keep human, and how to preserve trust.</li>
+				</ul>
+				<div class="card-actions">
+					<a class="button" href="mailto:hello@mapache-soft.com">Start a conversation</a>
+					<a class="button-secondary" href="/services/">Services structure</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container panel">
+			<p class="eyebrow">Proposed website structure</p>
+			<h2>A compact site that can grow from here.</h2>
+			<div class="grid">
+				<article>
+					<h3>Home</h3>
+					<p>A concise positioning page connecting apps, consulting, credibility, and contact.</p>
+				</article>
+				<article>
+					<h3>Apps</h3>
+					<p>Product cards for Renamer and Archiver, with room for screenshots, support links, and release notes later.</p>
+				</article>
+				<article>
+					<h3>Services</h3>
+					<p>Consulting offers, workshops, contract engineering, collaboration style, and contact path.</p>
+				</article>
+				<article>
+					<h3>About</h3>
+					<p>Founder background, operating principles, and a more human story behind the company.</p>
+				</article>
+				<article>
+					<h3>Support</h3>
+					<p>Links to app support, downloads, known issues, and eventually documentation.</p>
+				</article>
+				<article>
+					<h3>Legal</h3>
+					<p>Impressum, privacy policy, terms, and app-specific legal pages where required.</p>
+				</article>
+			</div>
+		</div>
+	</section>
 </Layout>
