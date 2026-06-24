@@ -1,4 +1,6 @@
 ---
+import { url } from '../lib/url';
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -10,11 +12,11 @@ const {
 } = Astro.props;
 
 const navItems = [
-	{ href: '/', label: 'Home' },
-	{ href: '/apps/', label: 'Apps' },
-	{ href: '/services/', label: 'Services' },
-	{ href: '/about/', label: 'About' },
-	{ href: '/impressum/', label: 'Impressum' },
+	{ href: url('/'), label: 'Home' },
+	{ href: url('/apps/'), label: 'Apps' },
+	{ href: url('/services/'), label: 'Services' },
+	{ href: url('/about/'), label: 'About' },
+	{ href: url('/impressum/'), label: 'Impressum' },
 ];
 
 const currentPath = Astro.url.pathname;
@@ -25,8 +27,8 @@ const currentPath = Astro.url.pathname;
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
+		<link rel="icon" type="image/svg+xml" href={url('/favicon.svg')} />
+		<link rel="icon" href={url('/favicon.ico')} />
 		<meta name="description" content={description} />
 		<meta name="generator" content={Astro.generator} />
 		<title>{title}</title>
@@ -35,7 +37,7 @@ const currentPath = Astro.url.pathname;
 		<a class="skip-link" href="#main-content">Skip to content</a>
 		<header class="site-header">
 			<div class="container header-grid">
-				<a class="brand" href="/" aria-label="Mapache Softworks home">
+				<a class="brand" href={url('/')} aria-label="Mapache Softworks home">
 					<span class="brand-mark">MS</span>
 					<span>
 						<strong>Mapache Softworks</strong>
@@ -60,8 +62,8 @@ const currentPath = Astro.url.pathname;
 			<div class="container footer-grid">
 				<p>© 2026 Mapache Softworks. All rights reserved.</p>
 				<nav aria-label="Footer navigation">
-					<a href="/impressum/">Impressum</a>
-					<a href="/privacy/">Privacy</a>
+					<a href={url('/impressum/')}>Impressum</a>
+					<a href={url('/privacy/')}>Privacy</a>
 					<a href="mailto:hello@mapache-soft.com">hello@mapache-soft.com</a>
 				</nav>
 			</div>

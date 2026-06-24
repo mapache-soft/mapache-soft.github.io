@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { url } from '../lib/url';
 ---
 
 <Layout
@@ -12,7 +13,7 @@ import Layout from '../layouts/Layout.astro';
 			<h1>Page not found</h1>
 			<p class="lede">The page you are looking for does not exist or has moved.</p>
 			<div class="hero-actions">
-				<a class="button" href="/">Back to home</a>
+				<a class="button" href={url('/')}>Back to home</a>
 				<a class="button-secondary" href="mailto:hello@mapache-soft.com">Get in touch</a>
 			</div>
 		</div>

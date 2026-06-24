@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { url } from '../lib/url';
 ---
 
 <Layout
@@ -45,7 +46,7 @@ import Layout from '../layouts/Layout.astro';
 			</p>
 			<div class="card-actions">
 				<a class="button" href="mailto:hello@mapache-soft.com">Say hello</a>
-				<a class="button-secondary" href="/services/">See services</a>
+				<a class="button-secondary" href={url('/services/')}>See services</a>
 			</div>
 		</div>
 	</section>
@@ -58,7 +59,7 @@ import Layout from '../layouts/Layout.astro';
 			</article>
 			<article class="card">
 				<h3>Company</h3>
-				<p>Mapache Softworks is registered in Austria. For legal details, see the <a href="/impressum/">Impressum</a>.</p>
+				<p>Mapache Softworks is registered in Austria. For legal details, see the <a href={url('/impressum/')}>Impressum</a>.</p>
 			</article>
 			<article class="card">
 				<h3>Contact</h3>

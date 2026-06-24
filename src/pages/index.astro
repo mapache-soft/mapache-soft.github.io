@@ -1,5 +1,6 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import { url } from '../lib/url';
 ---
 
 <Layout
@@ -14,8 +15,8 @@ import Layout from '../layouts/Layout.astro';
 				Mapache Softworks is the one-person company behind focused software products and hands-on consulting for teams who care about building useful, trustworthy technology.
 			</p>
 			<div class="hero-actions">
-				<a class="button" href="/services/">Work with me</a>
-				<a class="button-secondary" href="/apps/">Explore the apps</a>
+				<a class="button" href={url('/services/')}>Work with me</a>
+				<a class="button-secondary" href={url('/apps/')}>Explore the apps</a>
 			</div>
 		</div>
 	</section>
@@ -68,7 +69,7 @@ import Layout from '../layouts/Layout.astro';
 				</ul>
 				<div class="card-actions">
 					<a class="button" href="mailto:hello@mapache-soft.com">Start a conversation</a>
-					<a class="button-secondary" href="/services/">Services structure</a>
+					<a class="button-secondary" href={url('/services/')}>Services structure</a>
 				</div>
 			</div>
 		</div>
