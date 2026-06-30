@@ -35,18 +35,23 @@ import { url } from '../lib/url';
 	</section>
 
 	<section>
-		<div class="container panel">
-			<p class="eyebrow">Founder</p>
-			<h2>[Founder name]</h2>
-			<p>
-				[Short founder bio placeholder. Replace with a concise paragraph about background, experience, and what led to starting the company.]
-			</p>
-			<p>
-				Mapache Softworks is intentionally small, which keeps communication direct and decisions fast. For larger projects we collaborate with a trusted network of designers, engineers, and specialists.
-			</p>
-			<div class="card-actions">
-				<a class="button" href="mailto:hello@mapache-soft.com">Say hello</a>
-				<a class="button-secondary" href={url('/services/')}>See services</a>
+		<div class="container split">
+			<div>
+				<p class="eyebrow">Founder</p>
+				<h2>Carmen Huidobro</h2>
+			</div>
+			<div class="panel founder">
+				<img class="founder-photo" src={url('/carmen.jpg')} alt="Carmen Huidobro" />
+				<p>
+					Carmen is the founder of Mapache Softworks. She builds independent apps and helps teams create software that is useful, understandable, and respectful of the people who use it.
+				</p>
+				<p>
+					Mapache Softworks is intentionally small, which keeps communication direct and decisions fast. For larger projects we collaborate with a trusted network of designers, engineers, and specialists.
+				</p>
+				<div class="card-actions">
+					<a class="button" href="mailto:hello@mapache-soft.com">Say hello</a>
+					<a class="button-secondary" href={url('/services/')}>See services</a>
+				</div>
 			</div>
 		</div>
 	</section>
@@ -68,3 +73,12 @@ import { url } from '../lib/url';
 		</div>
 	</section>
 </Layout>
+
+<style>
+	.founder-photo {
+		width: 100%;
+		max-width: 320px;
+		border-radius: 24px;
+		margin-bottom: 24px;
+	}
+</style>
