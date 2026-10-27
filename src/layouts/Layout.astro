@@ -1,4 +1,7 @@
 ---
+import '@fontsource/oswald/latin-500.css';
+import '@fontsource/oswald/latin-700.css';
+import logoMark from '../assets/logo.svg';
 import { url } from '../lib/url';
 
 interface Props {
@@ -41,10 +44,16 @@ const currentPath = Astro.url.pathname;
 		<header class="site-header">
 			<div class="container header-grid">
 				<a class="brand" href={url('/')} aria-label="Mapache Softworks home">
-					<span class="brand-mark">MS</span>
-					<span>
-						<strong>Mapache Softworks</strong>
-						<small>Apps, systems, and careful software work</small>
+					<img
+						class="brand-mark"
+						src={logoMark.src}
+						width="48"
+						height="48"
+						alt=""
+					/>
+					<span class="brand-wordmark" aria-hidden="true">
+						<span>Mapache</span>
+						<span>Softworks</span>
 					</span>
 				</a>
 				<nav aria-label="Primary navigation">
@@ -213,32 +222,33 @@ const currentPath = Astro.url.pathname;
 	.brand {
 		display: inline-flex;
 		align-items: center;
-		gap: 14px;
+		gap: 12px;
 		color: var(--color-ink);
 		text-decoration: none;
 	}
 
 	.brand-mark {
-		display: grid;
+		display: block;
 		width: 48px;
 		height: 48px;
-		place-items: center;
-		border-radius: 16px;
-		background: linear-gradient(135deg, var(--palette-ocean), var(--palette-dawn));
-		color: var(--palette-moonlight);
-		font-size: 0.86rem;
-		font-weight: 800;
-		letter-spacing: 0.08em;
+		border-radius: 12px;
+		overflow: hidden;
+		object-fit: cover;
+		object-position: center;
+		flex-shrink: 0;
 	}
 
-	.brand strong,
-	.brand small {
-		display: block;
-	}
-
-	.brand small {
-		color: var(--color-muted);
-		font-size: 0.82rem;
+	.brand-wordmark {
+		display: flex;
+		flex-direction: column;
+		gap: 0;
+		font-family: "Oswald", ui-sans-serif, system-ui, sans-serif;
+		font-size: 1.05rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		line-height: 1.05;
+		text-transform: uppercase;
+		color: var(--palette-dawn);
 	}
 
 	nav ul {
@@ -284,8 +294,11 @@ const currentPath = Astro.url.pathname;
 	h2,
 	h3 {
 		margin: 0;
+		font-family: "Oswald", ui-sans-serif, system-ui, sans-serif;
+		font-weight: 700;
 		line-height: 1.05;
-		letter-spacing: -0.04em;
+		letter-spacing: 0.01em;
+		text-wrap: balance;
 	}
 
 	h1 {
