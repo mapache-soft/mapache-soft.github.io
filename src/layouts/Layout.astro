@@ -72,7 +72,13 @@ const currentPath = Astro.url.pathname;
 		</main>
 		<footer class="site-footer">
 			<div class="container footer-grid">
-				<p>© 2026 Mapache Softworks. All rights reserved.</p>
+				<div class="footer-meta">
+					<p>© 2026 Mapache Softworks. All rights reserved.</p>
+					<p class="footer-credit">
+						Logo & colour theme by
+						<a href="https://www.kirionearth.com" rel="noopener noreferrer" target="_blank">Kiri</a>
+					</p>
+				</div>
 				<nav aria-label="Footer navigation">
 					<a href={url('/impressum/')}>Impressum</a>
 					<a href={url('/privacy/')}>Privacy</a>
@@ -475,8 +481,28 @@ const currentPath = Astro.url.pathname;
 		font-size: 0.92rem;
 	}
 
+	.footer-meta {
+		display: grid;
+		gap: 6px;
+	}
+
 	.site-footer p {
 		margin: 0;
+	}
+
+	.footer-credit {
+		font-size: 0.85rem;
+		color: var(--color-subtle);
+	}
+
+	.footer-credit a {
+		color: inherit;
+		text-decoration: underline;
+		text-underline-offset: 2px;
+	}
+
+	.footer-credit a:hover {
+		color: var(--color-primary);
 	}
 
 	.site-footer nav {
