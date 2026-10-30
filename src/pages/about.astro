@@ -19,11 +19,11 @@ import { url } from '../lib/url';
 
 	<section>
 		<div class="container split">
-			<div>
+			<div class="reveal reveal-left">
 				<p class="eyebrow">Principles</p>
 				<h2>How we work.</h2>
 			</div>
-			<div class="panel">
+			<div class="panel reveal reveal-right" style="--reveal-delay: 90ms">
 				<ul class="list">
 					<li><strong>Own the product:</strong> We build things we are proud to maintain and support for years.</li>
 					<li><strong>Respect the user:</strong> Privacy defaults, local processing, and clear choices matter.</li>
@@ -36,11 +36,11 @@ import { url } from '../lib/url';
 
 	<section>
 		<div class="container split">
-			<div>
+			<div class="reveal reveal-left">
 				<p class="eyebrow">Founder</p>
 				<h2>Carmen Huidobro</h2>
 			</div>
-			<div class="panel founder">
+			<div class="panel founder reveal reveal-right" style="--reveal-delay: 90ms">
 				<img class="founder-photo" src={url('/carmen.jpg')} alt="Carmen Huidobro" />
 				<p>
 					Carmen is the founder of Mapache Softworks. She builds independent apps and helps teams create software that is useful, understandable, and respectful of the people who use it.
@@ -58,15 +58,15 @@ import { url } from '../lib/url';
 
 	<section>
 		<div class="container grid">
-			<article class="card">
+			<article class="card reveal reveal-scale" style="--reveal-delay: 0ms">
 				<h3>Location</h3>
 				<p>Based in Vienna, Austria. Remote-friendly and happy to work with teams across Europe and beyond.</p>
 			</article>
-			<article class="card">
+			<article class="card reveal reveal-scale" style="--reveal-delay: 80ms">
 				<h3>Company</h3>
 				<p>Mapache Softworks is registered in Austria. For legal details, see the <a href={url('/impressum/')}>Impressum</a>.</p>
 			</article>
-			<article class="card">
+			<article class="card reveal reveal-scale" style="--reveal-delay: 0ms">
 				<h3>Contact</h3>
 				<p>Questions, project ideas, or support requests are welcome at <a href="mailto:hola@mapache-soft.com">hola@mapache-soft.com</a>.</p>
 			</article>
