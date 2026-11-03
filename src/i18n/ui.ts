@@ -2,7 +2,6 @@ import type { Locale } from './config';
 
 export type UiStrings = {
 	skipToContent: string;
-	homeAria: string;
 	primaryNav: string;
 	footerNav: string;
 	nav: {
@@ -28,7 +27,6 @@ export type UiStrings = {
 export const ui: Record<Locale, UiStrings> = {
 	en: {
 		skipToContent: 'Skip to content',
-		homeAria: 'Mapache Softworks home',
 		primaryNav: 'Primary navigation',
 		footerNav: 'Footer navigation',
 		nav: {
@@ -53,7 +51,6 @@ export const ui: Record<Locale, UiStrings> = {
 	},
 	es: {
 		skipToContent: 'Saltar al contenido',
-		homeAria: 'Inicio de Mapache Softworks',
 		primaryNav: 'Navegación principal',
 		footerNav: 'Enlaces del pie de página',
 		nav: {

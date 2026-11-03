@@ -93,15 +93,17 @@ const otherLocales = locales.filter((item) => item !== locale);
 		<a class="skip-link" href="#main-content">{strings.skipToContent}</a>
 		<header class="site-header">
 			<div class="container header-grid">
-				<a class="brand" href={url('/', locale)} aria-label={strings.homeAria}>
+				<a class="brand" href={url('/', locale)}>
 					<img
 						class="brand-mark"
 						src={logoMark.src}
 						width="48"
 						height="48"
 						alt=""
+						decoding="async"
+						fetchpriority="high"
 					/>
-					<span class="brand-wordmark" aria-hidden="true">
+					<span class="brand-wordmark">
 						<span>Mapache</span>
 						<span>Softworks</span>
 					</span>
@@ -120,12 +122,12 @@ const otherLocales = locales.filter((item) => item !== locale);
 						item === locale ? (
 							<span class="lang-current" aria-current="true">
 								<span class="lang-full">{localeLabels[item]}</span>
-								<span class="lang-short" aria-hidden="true">{item.toUpperCase()}</span>
+								<span class="lang-short">{item.toUpperCase()}</span>
 							</span>
 						) : (
 							<a href={url(pagePath, item)} hreflang={localeTags[item]} lang={localeTags[item]}>
 								<span class="lang-full">{localeLabels[item]}</span>
-								<span class="lang-short" aria-hidden="true">{item.toUpperCase()}</span>
+								<span class="lang-short">{item.toUpperCase()}</span>
 							</a>
 						),
 					)}
@@ -198,6 +200,7 @@ const otherLocales = locales.filter((item) => item !== locale);
 		--color-ink: #0a3d40;
 		--color-muted: #4a6b6e;
 		--color-subtle: #7a9497;
+		--color-brand-wordmark: #6b4f96;
 		--color-paper: var(--palette-moonlight);
 		--color-card: #ffffff;
 		--color-card-tint: rgba(255, 255, 255, 0.78);
@@ -225,14 +228,15 @@ const otherLocales = locales.filter((item) => item !== locale);
 			--color-ink: var(--palette-moonlight);
 			--color-muted: color-mix(in srgb, var(--palette-frost) 72%, var(--palette-dawn));
 			--color-subtle: color-mix(in srgb, var(--palette-dawn) 65%, var(--palette-frost));
+			--color-brand-wordmark: var(--palette-glacier);
 			--color-paper: #061a1c;
 			--color-card: #0d2c2f;
 			--color-card-tint: color-mix(in srgb, #0d2c2f 88%, var(--palette-ocean));
 			--color-line: color-mix(in srgb, var(--palette-ocean) 35%, #1a3a3e);
 			--color-primary: #2eb8bf;
-			--color-primary-dark: #5ed0d6;
+			--color-primary-dark: #8ee4e8;
 			--color-accent: var(--palette-glacier);
-			--color-accent-soft: color-mix(in srgb, var(--palette-dawn) 40%, #0d2c2f);
+			--color-accent-soft: color-mix(in srgb, var(--palette-dawn) 28%, #0d2c2f);
 			--color-tag-bg: color-mix(in srgb, var(--palette-ocean) 28%, #0d2c2f);
 			--color-on-primary: #061a1c;
 			--color-body-glow: color-mix(in srgb, var(--palette-ocean) 35%, transparent);
@@ -370,7 +374,7 @@ const otherLocales = locales.filter((item) => item !== locale);
 		letter-spacing: 0.06em;
 		line-height: 1.05;
 		text-transform: uppercase;
-		color: var(--palette-dawn);
+		color: var(--color-brand-wordmark);
 	}
 
 	nav ul {
@@ -471,7 +475,8 @@ const otherLocales = locales.filter((item) => item !== locale);
 		font-size: clamp(2.1rem, 5vw, 4rem);
 	}
 
-	h3 {
+	h3,
+	.card h2 {
 		font-size: clamp(1.35rem, 2vw, 1.8rem);
 	}
 
@@ -556,6 +561,7 @@ const otherLocales = locales.filter((item) => item !== locale);
 		color: var(--color-muted);
 	}
 
+	.card h2 + p,
 	.card h3 + p,
 	.panel h2 + p {
 		margin-top: 16px;

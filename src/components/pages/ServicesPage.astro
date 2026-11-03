@@ -26,7 +26,7 @@ const c = services[locale];
 		<div class="container grid">
 			{c.cards.map((card, i) => (
 				<article class="card reveal reveal-scale" style={`--reveal-delay: ${(i % 2) * 80}ms`}>
-					<h3>{card.title}</h3>
+					<h2>{card.title}</h2>
 					<p>{card.body}</p>
 				</article>
 			))}
