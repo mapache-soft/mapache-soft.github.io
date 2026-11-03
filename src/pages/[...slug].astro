@@ -1,0 +1,32 @@
+---
+import AboutPage from '../components/pages/AboutPage.astro';
+import AppsPage from '../components/pages/AppsPage.astro';
+import CookiesPage from '../components/pages/CookiesPage.astro';
+import HomePage from '../components/pages/HomePage.astro';
+import ImpressumPage from '../components/pages/ImpressumPage.astro';
+import PrivacyPage from '../components/pages/PrivacyPage.astro';
+import ServicesPage from '../components/pages/ServicesPage.astro';
+import TermsPage from '../components/pages/TermsPage.astro';
+import { allPageStaticPaths, type PageId } from '../i18n/routes';
+import type { Locale } from '../i18n';
+
+export function getStaticPaths() {
+	return allPageStaticPaths();
+}
+
+const pages = {
+	home: HomePage,
+	apps: AppsPage,
+	services: ServicesPage,
+	about: AboutPage,
+	impressum: ImpressumPage,
+	privacy: PrivacyPage,
+	cookies: CookiesPage,
+	terms: TermsPage,
+} as const;
+
+const { locale, pageId } = Astro.props as { locale: Locale; pageId: PageId };
+const Page = pages[pageId];
+---
+
+<Page locale={locale} />

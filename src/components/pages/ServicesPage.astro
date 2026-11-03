@@ -1,0 +1,51 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { services, type Locale } from '../../i18n';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = services[locale];
+---
+
+<Layout title={c.title} description={c.description} locale={locale} pagePath="/services/">
+	<section class="hero">
+		<div class="container">
+			<p class="eyebrow">{c.eyebrow}</p>
+			<h1>{c.h1}</h1>
+			<p class="lede">{c.lede}</p>
+			<div class="hero-actions">
+				<a class="button" href="mailto:hola@mapache-soft.com">hola@mapache-soft.com</a>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container grid">
+			{c.cards.map((card, i) => (
+				<article class="card reveal reveal-scale" style={`--reveal-delay: ${(i % 2) * 80}ms`}>
+					<h3>{card.title}</h3>
+					<p>{card.body}</p>
+				</article>
+			))}
+		</div>
+	</section>
+
+	<section>
+		<div class="container split">
+			<div class="reveal reveal-left">
+				<p class="eyebrow">{c.collab.eyebrow}</p>
+				<h2>{c.collab.h2}</h2>
+			</div>
+			<div class="panel reveal reveal-right" style="--reveal-delay: 90ms">
+				<ul class="list">
+					{c.collab.items.map((item) => (
+						<li>{item}</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</section>
+</Layout>

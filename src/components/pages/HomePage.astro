@@ -1,0 +1,76 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { home, type Locale } from '../../i18n';
+import { url } from '../../lib/url';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = home[locale];
+---
+
+<Layout title={c.title} description={c.description} locale={locale} pagePath="/">
+	<section class="hero">
+		<div class="container">
+			<p class="eyebrow">{c.eyebrow}</p>
+			<h1>{c.h1}</h1>
+			<p class="lede">{c.lede}</p>
+			<div class="hero-actions">
+				<a class="button" href={url('/services/', locale)}>{c.ctaServices}</a>
+				<a class="button-secondary" href={url('/apps/', locale)}>{c.ctaApps}</a>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container grid two">
+			<article class="card reveal reveal-scale" style="--reveal-delay: 0ms">
+				<p class="eyebrow">{c.renamer.eyebrow}</p>
+				<h3>{c.renamer.title}</h3>
+				<p>{c.renamer.body}</p>
+				<ul class="tag-list" aria-label="Renamer">
+					{c.renamer.tags.map((tag) => <li>{tag}</li>)}
+				</ul>
+				<div class="card-actions">
+					<a class="button-secondary" href="https://renamer.com/mac">{c.renamer.visit}</a>
+				</div>
+			</article>
+			<article class="card reveal reveal-scale" style="--reveal-delay: 80ms">
+				<p class="eyebrow">{c.archiver.eyebrow}</p>
+				<h3>{c.archiver.title}</h3>
+				<p>{c.archiver.body}</p>
+				<ul class="tag-list" aria-label="Archiver">
+					{c.archiver.tags.map((tag) => <li>{tag}</li>)}
+				</ul>
+				<div class="card-actions">
+					<a class="button-secondary" href="https://archiverapp.com">{c.archiver.visit}</a>
+				</div>
+			</article>
+		</div>
+	</section>
+
+	<section>
+		<div class="container split">
+			<div class="reveal reveal-left">
+				<p class="eyebrow">{c.consulting.eyebrow}</p>
+				<h2>{c.consulting.h2}</h2>
+			</div>
+			<div class="panel reveal reveal-right" style="--reveal-delay: 100ms">
+				<p>{c.consulting.body}</p>
+				<ul class="list">
+					{c.consulting.items.map((item) => (
+						<li>
+							<strong>{item.label}</strong> {item.text}
+						</li>
+					))}
+				</ul>
+				<div class="card-actions">
+					<a class="button" href="mailto:hola@mapache-soft.com">{c.consulting.ctaMail}</a>
+					<a class="button-secondary" href={url('/services/', locale)}>{c.consulting.ctaServices}</a>
+				</div>
+			</div>
+		</div>
+	</section>
+</Layout>

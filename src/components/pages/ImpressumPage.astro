@@ -1,0 +1,49 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { impressum, type Locale } from '../../i18n';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = impressum[locale];
+---
+
+<Layout title={c.title} description={c.description} locale={locale} pagePath="/impressum/">
+	<section class="hero">
+		<div class="container legal">
+			<p class="eyebrow">{c.eyebrow}</p>
+			<h1>{c.h1}</h1>
+		</div>
+	</section>
+
+	<section>
+		<div class="container legal panel reveal">
+			<h2>{c.legalHeading}</h2>
+			<dl>
+				{c.fields.map((field) => (
+					<>
+						<dt>{field.dt}</dt>
+						<dd>
+							{field.href ? <a href={field.href}>{field.dd}</a> : field.dd}
+						</dd>
+					</>
+				))}
+			</dl>
+
+			<h2>{c.contentHeading}</h2>
+			<p>{c.contentBody}</p>
+
+			<h2>{c.disputeHeading}</h2>
+			<p>
+				{c.disputeBefore}
+				<a href="https://ec.europa.eu/consumers/odr/">ec.europa.eu/consumers/odr</a>
+				{c.disputeAfter}
+			</p>
+
+			<h2>{c.linksHeading}</h2>
+			<p>{c.linksBody}</p>
+		</div>
+	</section>
+</Layout>

@@ -1,0 +1,92 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { about, type Locale } from '../../i18n';
+import { url } from '../../lib/url';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = about[locale];
+---
+
+<Layout title={c.title} description={c.description} locale={locale} pagePath="/about/">
+	<section class="hero">
+		<div class="container">
+			<p class="eyebrow">{c.eyebrow}</p>
+			<h1>{c.h1}</h1>
+			<p class="lede">{c.lede}</p>
+		</div>
+	</section>
+
+	<section>
+		<div class="container split">
+			<div class="reveal reveal-left">
+				<p class="eyebrow">{c.principles.eyebrow}</p>
+				<h2>{c.principles.h2}</h2>
+			</div>
+			<div class="panel reveal reveal-right" style="--reveal-delay: 90ms">
+				<ul class="list">
+					{c.principles.items.map((item) => (
+						<li>
+							<strong>{item.label}</strong> {item.text}
+						</li>
+					))}
+				</ul>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container split">
+			<div class="reveal reveal-left">
+				<p class="eyebrow">{c.founder.eyebrow}</p>
+				<h2>{c.founder.h2}</h2>
+			</div>
+			<div class="panel founder reveal reveal-right" style="--reveal-delay: 90ms">
+				<img class="founder-photo" src={url('/carmen.jpg')} alt={c.founder.photoAlt} />
+				<p>{c.founder.p1}</p>
+				<p>{c.founder.p2}</p>
+				<div class="card-actions">
+					<a class="button" href="mailto:hola@mapache-soft.com">{c.founder.ctaHello}</a>
+					<a class="button-secondary" href={url('/services/', locale)}>{c.founder.ctaServices}</a>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container grid">
+			<article class="card reveal reveal-scale" style="--reveal-delay: 0ms">
+				<h3>{c.cards.location.title}</h3>
+				<p>{c.cards.location.body}</p>
+			</article>
+			<article class="card reveal reveal-scale" style="--reveal-delay: 80ms">
+				<h3>{c.cards.company.title}</h3>
+				<p>
+					{c.cards.company.bodyBefore}
+					<a href={url('/impressum/', locale)}>{c.cards.company.impressum}</a>
+					{c.cards.company.bodyAfter}
+				</p>
+			</article>
+			<article class="card reveal reveal-scale" style="--reveal-delay: 0ms">
+				<h3>{c.cards.contact.title}</h3>
+				<p>
+					{c.cards.contact.bodyBefore}
+					<a href="mailto:hola@mapache-soft.com">hola@mapache-soft.com</a>
+					{c.cards.contact.bodyAfter}
+				</p>
+			</article>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.founder-photo {
+		width: 100%;
+		max-width: 320px;
+		border-radius: 24px;
+		margin-bottom: 24px;
+	}
+</style>

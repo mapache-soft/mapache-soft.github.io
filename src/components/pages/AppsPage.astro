@@ -1,0 +1,50 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { apps, type Locale } from '../../i18n';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = apps[locale];
+---
+
+<Layout title={c.title} description={c.description} locale={locale} pagePath="/apps/">
+	<section class="hero">
+		<div class="container">
+			<p class="eyebrow">{c.eyebrow}</p>
+			<h1>{c.h1}</h1>
+			<p class="lede">{c.lede}</p>
+		</div>
+	</section>
+
+	<section>
+		<div class="container grid two">
+			<article class="card reveal reveal-scale" style="--reveal-delay: 0ms">
+				<p class="eyebrow">{c.renamer.eyebrow}</p>
+				<h2>{c.renamer.title}</h2>
+				<p>{c.renamer.body}</p>
+				<ul class="tag-list">
+					{c.renamer.tags.map((tag) => <li>{tag}</li>)}
+				</ul>
+				<div class="card-actions">
+					<a class="button" href="https://renamer.com/mac">{c.renamer.open}</a>
+					<a class="button-secondary" href="https://renamer.com/download/mac">{c.renamer.download}</a>
+				</div>
+			</article>
+			<article class="card reveal reveal-scale" style="--reveal-delay: 80ms">
+				<p class="eyebrow">{c.archiver.eyebrow}</p>
+				<h2>{c.archiver.title}</h2>
+				<p>{c.archiver.body}</p>
+				<ul class="tag-list">
+					{c.archiver.tags.map((tag) => <li>{tag}</li>)}
+				</ul>
+				<div class="card-actions">
+					<a class="button" href="https://archiverapp.com">{c.archiver.open}</a>
+					<a class="button-secondary" href="https://incrediblebee.com/download/archiver-5">{c.archiver.download}</a>
+				</div>
+			</article>
+		</div>
+	</section>
+</Layout>

@@ -1,0 +1,64 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { privacy, type Locale } from '../../i18n';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = privacy[locale];
+---
+
+<Layout title={c.title} description={c.description} locale={locale} pagePath="/privacy/">
+	<section class="hero">
+		<div class="container legal">
+			<p class="eyebrow">{c.eyebrow}</p>
+			<h1>{c.h1}</h1>
+		</div>
+	</section>
+
+	<section>
+		<div class="container legal panel reveal">
+			<h2>{c.whoHeading}</h2>
+			<p>{c.whoIntro}</p>
+			<p>
+				<strong>Mapache Softworks GmbH</strong><br />
+				Leopoldine-Padaurek-Straße 17/3<br />
+				1210 Wien, Austria<br />
+				Email: <a href="mailto:hola@mapache-soft.com">hola@mapache-soft.com</a>
+			</p>
+
+			<h2>{c.whatHeading}</h2>
+			<p>{c.whatIntro}</p>
+			<ul class="list">
+				{c.whatItems.map((item) => (
+					<li>
+						<strong>{item.label}</strong> {item.text}
+					</li>
+				))}
+			</ul>
+
+			<h2>{c.basisHeading}</h2>
+			<p>{c.basisBody}</p>
+
+			<h2>{c.retainHeading}</h2>
+			<p>{c.retainBody}</p>
+
+			<h2>{c.rightsHeading}</h2>
+			<p>{c.rightsBody}</p>
+
+			<h2>{c.thirdHeading}</h2>
+			<p>{c.thirdBody}</p>
+
+			<h2>{c.changesHeading}</h2>
+			<p>{c.changesBody}</p>
+		</div>
+	</section>
+</Layout>
+
+<style>
+	.legal.panel .list {
+		margin-top: 24px;
+	}
+</style>

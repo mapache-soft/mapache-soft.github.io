@@ -2,34 +2,55 @@
 import '@fontsource/ubuntu/latin-500.css';
 import '@fontsource/ubuntu/latin-700.css';
 import logoMark from '../assets/logo.svg';
-import { url } from '../lib/url';
+import {
+	defaultLocale,
+	localeLabels,
+	localeTags,
+	locales,
+	ogLocales,
+	parseLocalePath,
+	t,
+	type Locale,
+} from '../i18n';
+import { absoluteUrl, url } from '../lib/url';
 
 interface Props {
 	title?: string;
 	description?: string;
+	locale?: Locale;
+	/** Locale-neutral path, e.g. `/apps/` or `/`. */
+	pagePath?: string;
 }
 
 const {
+	locale = defaultLocale,
+	pagePath: pagePathProp,
 	title = 'Mapache Softworks',
-	description = 'Independent software company for thoughtful Mac apps and product-minded engineering consulting.',
+	description,
 } = Astro.props;
 
-const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+const strings = t(locale);
+const resolvedDescription = description ?? strings.defaultDescription;
+const { path: detectedPath } = parseLocalePath(Astro.url.pathname);
+const pagePath = pagePathProp ?? detectedPath;
+
+const canonicalURL = absoluteUrl(pagePath, locale, Astro.site);
 const ogImageURL = new URL(url('/og.png'), Astro.site);
 
 const navItems = [
-	{ href: url('/'), label: 'Home' },
-	{ href: url('/apps/'), label: 'Apps' },
-	{ href: url('/services/'), label: 'Services' },
-	{ href: url('/about/'), label: 'About' },
-	{ href: url('/impressum/'), label: 'Impressum' },
+	{ href: url('/', locale), label: strings.nav.home, path: '/' },
+	{ href: url('/apps/', locale), label: strings.nav.apps, path: '/apps/' },
+	{ href: url('/services/', locale), label: strings.nav.services, path: '/services/' },
+	{ href: url('/about/', locale), label: strings.nav.about, path: '/about/' },
+	{ href: url('/impressum/', locale), label: strings.nav.impressum, path: '/impressum/' },
 ];
 
-const currentPath = Astro.url.pathname;
+const currentPath = url(pagePath, locale);
+const otherLocales = locales.filter((item) => item !== locale);
 ---
 
 <!doctype html>
-<html lang="en">
+<html lang={localeTags[locale]}>
 	<head>
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width" />
@@ -38,30 +59,41 @@ const currentPath = Astro.url.pathname;
 		<meta name="theme-color" content="#061a1c" media="(prefers-color-scheme: dark)" />
 		<link rel="icon" type="image/svg+xml" href={logoMark.src} />
 		<link rel="icon" href={url('/favicon.ico')} />
-		<meta name="description" content={description} />
+		<meta name="description" content={resolvedDescription} />
 		<meta name="generator" content={Astro.generator} />
 		<link rel="canonical" href={canonicalURL} />
+		{locales.map((item) => (
+			<link
+				rel="alternate"
+				hreflang={localeTags[item]}
+				href={absoluteUrl(pagePath, item, Astro.site)}
+			/>
+		))}
+		<link rel="alternate" hreflang="x-default" href={absoluteUrl(pagePath, defaultLocale, Astro.site)} />
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Mapache Softworks" />
-		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale" content={ogLocales[locale]} />
+		{otherLocales.map((item) => (
+			<meta property="og:locale:alternate" content={ogLocales[item]} />
+		))}
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:title" content={title} />
-		<meta property="og:description" content={description} />
+		<meta property="og:description" content={resolvedDescription} />
 		<meta property="og:image" content={ogImageURL} />
 		<meta property="og:image:width" content="1200" />
 		<meta property="og:image:height" content="630" />
-		<meta property="og:image:alt" content="Mapache Softworks — thoughtful apps and product-minded software work" />
+		<meta property="og:image:alt" content={strings.ogImageAlt} />
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
-		<meta name="twitter:description" content={description} />
+		<meta name="twitter:description" content={resolvedDescription} />
 		<meta name="twitter:image" content={ogImageURL} />
 		<title>{title}</title>
 	</head>
 	<body>
-		<a class="skip-link" href="#main-content">Skip to content</a>
+		<a class="skip-link" href="#main-content">{strings.skipToContent}</a>
 		<header class="site-header">
 			<div class="container header-grid">
-				<a class="brand" href={url('/')} aria-label="Mapache Softworks home">
+				<a class="brand" href={url('/', locale)} aria-label={strings.homeAria}>
 					<img
 						class="brand-mark"
 						src={logoMark.src}
@@ -74,13 +106,24 @@ const currentPath = Astro.url.pathname;
 						<span>Softworks</span>
 					</span>
 				</a>
-				<nav aria-label="Primary navigation">
+				<nav aria-label={strings.primaryNav}>
 					<ul>
 						{navItems.map((item) => (
 							<li>
 								<a href={item.href} aria-current={currentPath === item.href ? 'page' : undefined}>{item.label}</a>
 							</li>
 						))}
+						<li class="lang-switch" aria-label={strings.language}>
+							{locales.map((item) =>
+								item === locale ? (
+									<span class="lang-current" aria-current="true">{localeLabels[item]}</span>
+								) : (
+									<a href={url(pagePath, item)} hreflang={localeTags[item]} lang={localeTags[item]}>
+										{localeLabels[item]}
+									</a>
+								),
+							)}
+						</li>
 					</ul>
 				</nav>
 			</div>
@@ -91,17 +134,17 @@ const currentPath = Astro.url.pathname;
 		<footer class="site-footer">
 			<div class="container footer-grid">
 				<div class="footer-meta">
-					<p>© 2026 Mapache Softworks. All rights reserved.</p>
+					<p>{strings.footer.rights}</p>
 					<p class="footer-credit">
-             Logo & colour theme by{" "}
+						{strings.footer.logoCredit}{" "}
 						<a href="https://www.kirionearth.com" rel="noopener noreferrer" target="_blank">Kiri</a>
 					</p>
 				</div>
-				<nav aria-label="Footer navigation">
-					<a href={url('/impressum/')}>Impressum</a>
-					<a href={url('/privacy/')}>Privacy</a>
-					<a href={url('/cookies/')}>Cookies</a>
-					<a href={url('/terms/')}>Terms</a>
+				<nav aria-label={strings.footerNav}>
+					<a href={url('/impressum/', locale)}>{strings.footer.impressum}</a>
+					<a href={url('/privacy/', locale)}>{strings.footer.privacy}</a>
+					<a href={url('/cookies/', locale)}>{strings.footer.cookies}</a>
+					<a href={url('/terms/', locale)}>{strings.footer.terms}</a>
 					<a href="mailto:hola@mapache-soft.com">hola@mapache-soft.com</a>
 				</nav>
 			</div>
@@ -327,6 +370,40 @@ const currentPath = Astro.url.pathname;
 
 	nav a:hover,
 	nav a[aria-current="page"] {
+		background: var(--color-accent-soft);
+		color: var(--color-primary-dark);
+	}
+
+	.lang-switch {
+		display: inline-flex;
+		align-items: center;
+		gap: 4px;
+		margin-left: 4px;
+		padding-left: 10px;
+		border-left: 1px solid var(--color-line);
+	}
+
+	.lang-switch a,
+	.lang-current {
+		display: inline-flex;
+		align-items: center;
+		border-radius: 999px;
+		padding: 8px 11px;
+		font-size: 0.85rem;
+		font-weight: 650;
+		text-decoration: none;
+	}
+
+	.lang-current {
+		background: var(--color-accent-soft);
+		color: var(--color-primary-dark);
+	}
+
+	.lang-switch a {
+		color: var(--color-muted);
+	}
+
+	.lang-switch a:hover {
 		background: var(--color-accent-soft);
 		color: var(--color-primary-dark);
 	}

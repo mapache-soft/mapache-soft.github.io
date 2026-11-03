@@ -1,0 +1,72 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { cookies, type Locale } from '../../i18n';
+
+interface Props {
+	locale: Locale;
+}
+
+const { locale } = Astro.props;
+const c = cookies[locale];
+---
+
+<Layout title={c.title} description={c.description} locale={locale} pagePath="/cookies/">
+	<section class="hero">
+		<div class="container legal">
+			<p class="eyebrow">{c.eyebrow}</p>
+			<h1>{c.h1}</h1>
+		</div>
+	</section>
+
+	<section>
+		<div class="container legal panel reveal">
+			<p class="lede">{c.updated}</p>
+
+			<p>{c.intro}</p>
+			<ul class="list">
+				{c.sites.map((site) => (
+					<li>
+						<a href={site.href}>{site.label}</a> {site.note}
+					</li>
+				))}
+			</ul>
+
+			<p>{c.consent}</p>
+
+			<h2>{c.whatHeading}</h2>
+			<p>{c.whatP1}</p>
+			<p>{c.whatP2}</p>
+
+			<h2>{c.howHeading}</h2>
+			<p>{c.howIntro}</p>
+			<ul class="list">
+				{c.howItems.map((item) => (
+					<li>{item}</li>
+				))}
+			</ul>
+			<p>{c.howNote}</p>
+
+			<h2>{c.choicesHeading}</h2>
+			<p>{c.choicesP1}</p>
+			<p>{c.choicesP2}</p>
+			<ul class="list">
+				{c.choicesLinks.map((link) => (
+					<li>
+						<a href={link.href}>{link.label}</a>
+					</li>
+				))}
+			</ul>
+			<p>{c.choicesP3}</p>
+
+			<h2>{c.moreHeading}</h2>
+			<p>{c.moreIntro}</p>
+			<ul class="list">
+				{c.moreLinks.map((link) => (
+					<li>
+						<a href={link.href}>{link.label}</a>
+					</li>
+				))}
+			</ul>
+		</div>
+	</section>
+</Layout>
