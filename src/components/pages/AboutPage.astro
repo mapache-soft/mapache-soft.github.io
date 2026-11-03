@@ -1,5 +1,7 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../../layouts/Layout.astro';
+import carmenPhoto from '../../assets/carmen.jpg';
 import { about, type Locale } from '../../i18n';
 import { url } from '../../lib/url';
 
@@ -45,7 +47,19 @@ const c = about[locale];
 				<h2>{c.founder.h2}</h2>
 			</div>
 			<div class="panel founder reveal reveal-right" style="--reveal-delay: 90ms">
-				<img class="founder-photo" src={url('/carmen.jpg')} alt={c.founder.photoAlt} />
+				<Image
+					class="founder-photo"
+					src={carmenPhoto}
+					alt={c.founder.photoAlt}
+					widths={[320, 640]}
+					sizes="320px"
+					width={320}
+					height={320}
+					format="webp"
+					quality={80}
+					loading="lazy"
+					decoding="async"
+				/>
 				<p>{c.founder.p1}</p>
 				<p>{c.founder.p2}</p>
 				<div class="card-actions">
