@@ -547,6 +547,9 @@ const otherLocales = locales.filter((item) => item !== locale);
 	}
 
 	.card {
+		display: flex;
+		flex-direction: column;
+		height: 100%;
 		padding: 28px;
 	}
 
@@ -571,7 +574,7 @@ const otherLocales = locales.filter((item) => item !== locale);
 		display: flex;
 		flex-wrap: wrap;
 		gap: 8px;
-		margin: 20px 0 0;
+		margin: auto 0 0;
 		padding: 0;
 		list-style: none;
 	}
